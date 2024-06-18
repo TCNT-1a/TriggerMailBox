@@ -1,0 +1,75 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "workflow/ReadMailBox.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [
+        "in_folder",
+        "out_mails"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "Config&Sequence_1",
+        "folder&Sequence_1",
+        "mails&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "workflow/ReadConfig.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "process&Sequence_3",
+        "subject&Sequence_3",
+        "dt&Sequence_2"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "out_Config"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "workflow/AddQueue.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "i&Sequence_1",
+        "Config&Sequence_1",
+        "folder&Sequence_1",
+        "mails&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "workflow/LaiSuat.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "arr_data&Sequence_1",
+        "browser&Sequence_1",
+        "dt_config&Sequence_1",
+        "dt_output&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}
