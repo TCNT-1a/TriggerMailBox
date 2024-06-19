@@ -49,6 +49,7 @@
       "Path": "workflow/AddQueue.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
+        "outputPath&Sequence_2",
         "i&Sequence_1",
         "Config&Sequence_1",
         "folder&Sequence_1",
@@ -67,7 +68,9 @@
         "dt_config&Sequence_1",
         "dt_output&Sequence_1"
       ],
-      "ArgumentsSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [
+        "out_fileOutputPath"
+      ],
       "ConstantsSectionElementsOrder": [],
       "AddedNamespaces": null
     }
