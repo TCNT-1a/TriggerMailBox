@@ -156,7 +156,7 @@
                         <OutArgument x:TypeArguments="x:String">[subject]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[row("Subject").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[row("Key").ToString]</InArgument>
                       </Assign.Value>
                     </Assign>
                     <Assign sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="Assign_3">
@@ -164,7 +164,7 @@
                         <OutArgument x:TypeArguments="x:String">[process]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="x:String">[row("ProcessName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String">[row("Value").ToString]</InArgument>
                       </Assign.Value>
                     </Assign>
                     <If Condition="[not out_Dic.ContainsKey(subject)]" sap:VirtualizedContainerService.HintSize="450,540" sap2010:WorkflowViewState.IdRef="If_1">

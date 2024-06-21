@@ -117,7 +117,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="374,57" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="[in_folder]" MarkAsRead="False" Messages="[out_mails]" OnlyUnreadMessages="True" OrderByDate="NewestFirst" Top="30" />
+    <ui:GetOutlookMailMessages Account="{x:Null}" Filter="{x:Null}" FilterByMessageIds="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Get Outlook Mail Messages" GetAttachements="False" sap:VirtualizedContainerService.HintSize="374,57" sap2010:WorkflowViewState.IdRef="GetOutlookMailMessages_1" MailFolder="[in_folder]" MarkAsRead="False" Messages="[out_mails]" OnlyUnreadMessages="True" OrderByDate="NewestFirst" Top="100" />
     <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="374,113" sap2010:WorkflowViewState.IdRef="WriteLine_1" />
   </Sequence>
 </Activity>

@@ -88,7 +88,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="450,697" sap2010:WorkflowViewState.IdRef="Sequence_1">
       <Sequence.Variables>
-        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="mails" />
+        <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="Mails" />
         <Variable x:TypeArguments="x:String" Name="folder">
           <Variable.Default>
             <Literal x:TypeArguments="x:String">Inbox\RPA</Literal>
@@ -114,9 +114,11 @@
           <InArgument x:TypeArguments="x:String" x:Key="in_folder">[folder]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="AddQueue - Invoke Workflow File (workflow\AddQueue.xaml)" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="framework\AddQueue.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="AddQueue - Invoke Workflow File (framework\AddQueue.xaml)" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="framework\AddQueue.xaml">
         <ui:InvokeWorkflowFile.Arguments>
-          <scg:Dictionary x:TypeArguments="x:String, Argument" />
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_List">[List]</InArgument>
+          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Assest">[Assest]</InArgument>
+          <InArgument x:TypeArguments="scg:List(snm:MailMessage)" x:Key="in_Mails">[Mails]</InArgument>
         </ui:InvokeWorkflowFile.Arguments>
       </ui:InvokeWorkflowFile>
     </Sequence>

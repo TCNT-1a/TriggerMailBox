@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property Name="in_List" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_Assest" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_Mails" Type="InArgument(scg:List(snm:MailMessage))" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1069,1589</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1069,2055</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AddQueue_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -103,9 +104,8 @@
       <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AddQueue" sap:VirtualizedContainerService.HintSize="588,1524" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AddQueue" sap:VirtualizedContainerService.HintSize="684,1990" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="mails" />
       <Variable x:TypeArguments="x:Int32" Name="i" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
@@ -113,55 +113,86 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="[i]" DisplayName="For Each currentMailMessage" sap:VirtualizedContainerService.HintSize="546,1459" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[mails]">
+    <ui:ForEach x:TypeArguments="snm:MailMessage" CurrentIndex="[i]" DisplayName="For Each currentMailMessage" sap:VirtualizedContainerService.HintSize="642,1925" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Mails]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="snm:MailMessage">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="currentMailMessage" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="512,1322" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="608,1788" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="snm:MailMessage" Name="mail" />
+            </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[in_List.ContainsKey(mails(i).Subject)]" sap:VirtualizedContainerService.HintSize="450,1234" sap2010:WorkflowViewState.IdRef="If_2">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
+            <Assign sap:VirtualizedContainerService.HintSize="546,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+              <Assign.To>
+                <OutArgument x:TypeArguments="snm:MailMessage">[mail]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="snm:MailMessage">[in_Mails(i)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[mail.Subject.Contains(&quot;[RPA]&quot;)]" sap:VirtualizedContainerService.HintSize="546,1586" sap2010:WorkflowViewState.IdRef="If_3">
               <If.Then>
-                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,970" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                  <Sequence.Variables>
-                    <Variable x:TypeArguments="x:String" Name="outputPath" />
-                  </Sequence.Variables>
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="512,1322" sap2010:WorkflowViewState.IdRef="Sequence_5">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="354,122" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[mails(i).Sender.Address]" />
-                  <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="LaiSuat - Invoke Workflow File (workflow\LaiSuat.xaml)" sap:VirtualizedContainerService.HintSize="354,206" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="workflow\LaiSuat.xaml">
-                    <ui:InvokeWorkflowFile.Arguments>
-                      <OutArgument x:TypeArguments="x:String" x:Key="out_fileOutputPath">[outputPath]</OutArgument>
-                    </ui:InvokeWorkflowFile.Arguments>
-                  </ui:InvokeWorkflowFile>
-                  <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Body="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="354,178" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[mails(i).Subject &amp; &quot;_Result&quot;]" To="[mails(i).Sender.Address]">
-                    <ui:SendOutlookMail.Files>
-                      <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
-                        <InArgument x:TypeArguments="x:String">[outputPath]</InArgument>
-                      </scg:List>
-                    </ui:SendOutlookMail.Files>
-                  </ui:SendOutlookMail>
-                  <ui:MarkOutlookMailAsRead DisplayName="Mark Outlook Mail As Read/Unread" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="MarkOutlookMailAsRead_1" MailMessage="[currentMailMessage]" MarkAs="Read" />
-                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="354,122" sap2010:WorkflowViewState.IdRef="WriteLine_2" />
-                  <ui:Comment sap:VirtualizedContainerService.HintSize="354,79" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property" />
+                  <If Condition="[in_List.ContainsKey(mail.Subject.Split(&quot;[RPA]&quot;)(1))]" sap:VirtualizedContainerService.HintSize="450,1234" sap2010:WorkflowViewState.IdRef="If_2">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,970" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                        <Sequence.Variables>
+                          <Variable x:TypeArguments="x:String" Name="outputPath" />
+                        </Sequence.Variables>
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="354,122" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[in_Mails(i).Sender.Address]" />
+                        <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="LaiSuat - Invoke Workflow File (workflow\LaiSuat.xaml)" sap:VirtualizedContainerService.HintSize="354,206" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="workflow\LaiSuat.xaml">
+                          <ui:InvokeWorkflowFile.Arguments>
+                            <OutArgument x:TypeArguments="x:String" x:Key="out_fileOutputPath">[outputPath]</OutArgument>
+                          </ui:InvokeWorkflowFile.Arguments>
+                        </ui:InvokeWorkflowFile>
+                        <ui:SendOutlookMail Account="{x:Null}" Bcc="{x:Null}" Body="{x:Null}" Cc="{x:Null}" ContinueOnError="{x:Null}" MailMessage="{x:Null}" ReplyTo="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Send Outlook Mail Message" sap:VirtualizedContainerService.HintSize="354,178" sap2010:WorkflowViewState.IdRef="SendOutlookMail_2" Importance="Normal" IsBodyHtml="False" IsDraft="False" Sensitivity="Normal" Subject="[in_Mails(i).Subject &amp; &quot;_Result&quot;]" To="[in_Mails(i).Sender.Address]">
+                          <ui:SendOutlookMail.Files>
+                            <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                              <InArgument x:TypeArguments="x:String">[outputPath]</InArgument>
+                            </scg:List>
+                          </ui:SendOutlookMail.Files>
+                        </ui:SendOutlookMail>
+                        <ui:MarkOutlookMailAsRead DisplayName="Mark Outlook Mail As Read/Unread" sap:VirtualizedContainerService.HintSize="354,175" sap2010:WorkflowViewState.IdRef="MarkOutlookMailAsRead_1" MailMessage="[currentMailMessage]" MarkAs="Read" />
+                        <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="354,122" sap2010:WorkflowViewState.IdRef="WriteLine_2" />
+                        <ui:Comment sap:VirtualizedContainerService.HintSize="354,79" sap2010:WorkflowViewState.IdRef="Comment_1" Text="// Write your comments in the Text property" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,103" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
                 </Sequence>
               </If.Then>
               <If.Else>
-                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,103" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,103" sap2010:WorkflowViewState.IdRef="Sequence_6">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
